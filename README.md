@@ -19,8 +19,8 @@ The command `make copy` will copy the program `pandemic.bin` to the other comput
 |command|description|
 |-------|-----------|
 |`make`| Compile the program.|
-|`make run`| Run the program.|
-| `make run-c`| Run the program, but compile first.|
-| `make run-cc`| Run the program, but compile and copy first.|
+|`make run ARGS="stuff"`| Run the program.|
+| `make run-c ARGS="stuff"`| Run the program, but compile first.|
+| `make run-cc ARGS="stuff"`| Run the program, but compile and copy first.|
 
 You will need to supply your own `hostfile`, because we shouldn't have our IP addresses public in this repo.
