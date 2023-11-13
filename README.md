@@ -8,7 +8,7 @@ These Ubuntu packages are required to run this project
 * openmpi-doc (this one is optional)
 You can install these with this command (as root):
 ```bash
-apt install openmpi-bin openmpi-common libopenmpi-devel openmpi-doc
+apt install openmpi-bin openmpi-common libopenmpi-dev openmpi-doc
 ```
 
 ## Project Structure
@@ -24,4 +24,3 @@ The command `make copy` will copy the program `pandemic.bin` to the other comput
 | `make run-cc`| Run the program, but compile and copy first.|
 
 You will need to supply your own `hostfile`, because we shouldn't have our IP addresses public in this repo.
->>>>>>> a4bd76a (Added project structure)
