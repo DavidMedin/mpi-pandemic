@@ -1,5 +1,10 @@
 all: pandemic.bin
 
+#CFLAGS+=-DTEXT_DISPLAY # Uncomment to show text display
+CFLAGS+=-DX_DISPLAY -L/usr/X11R6/lib -lX11 # Uncomment to show X display
+CFLAGS+=-DSHOW_RESULTS # Uncomment to make the program print its results
+
+
 run: # Run without compiling or copying first
 	mpirun     --hostfile hostfile      `pwd`/pandemic.bin $(ARGS)
 # 	 run   |< with these computers >|   |<     this program on each computer  >|
@@ -13,5 +18,8 @@ run-cc: copy # Run with compiling and copying first
 copy: pandemic.bin
 	./copy.sh < hostfile
 
-pandemic.bin: main.c
-	mpicc src/pandemic.c -o pandemic.bin
+pandemic.bin: src/Pandemic.c
+	mpicc $(CFLAGS) src/Pandemic.c -o pandemic.bin
+	
+clean: 
+	rm -f pandemic.bin

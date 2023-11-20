@@ -1,4 +1,41 @@
-#pragma once
+/* Parallelization: Infectious Disease
+ * By Aaron Weeden, Shodor Education Foundation, Inc.
+ * November 2011
+ * Modified by Yu Zhao, Macalester College.
+ * July 2013
+ * (Modularized the original code)
+ *
+ * Note on naming scheme:  Variables that begin with "our" are private to
+ * processes on a node in a cluster and shared by threads. */
+
+#ifndef PANDEMIC_DEFAULTS_H
+#define PANDEMIC_DEFAULTS_H
+
+// States of people -- all people are one of these 4 states 
+// These are const char because they are displayed as ASCII
+// if TEXT_DISPLAY is enabled 
+const char INFECTED = 'X';
+const char IMMUNE = 'I';
+const char SUSCEPTIBLE = 'o';
+const char DEAD = ' ';
+
+// Size, in pixels, of the X window(s) for each person
+#ifdef X_DISPLAY
+const int PIXEL_WIDTH_PER_PERSON = 10;
+const int PIXEL_HEIGHT_PER_PERSON = 10;
+#endif
+
+// Default parameters for the simulation
+const int DEFAULT_ENVIRO_SIZE = 30;
+const int DEFAULT_RADIUS = 3;
+const int DEFAULT_DURATION = 50;
+const int DEFAULT_CONT_FACTOR = 30;
+const int DEFAULT_DEAD_FACTOR = 30;
+const int DEFAULT_DAYS = 250;
+const int DEFAULT_MICROSECS = 100000;
+const int DEFAULT_SIZE = 50;
+const int DEFAULT_INIT_INFECTED = 1;
+
 // All the data needed globally. Holds EVERYONE's location, 
 // states and other necessary counters.
 struct global_t 
@@ -48,6 +85,7 @@ struct our_t
     // our people's infected time
     int *our_num_days_infected;
 };
+
 // Data being used as constant
 struct const_t 
 {
@@ -63,6 +101,18 @@ struct const_t
     int total_number_of_days;
     int microseconds_per_day;
 };
+
+// Stats data private to each node: Data being used by 
+// each process on a node in a cluster when using MPI. 
+// Each process holds stats data for a subset of people.
+struct stats_t 
+{
+    double our_num_infections;
+    double our_num_infection_attempts;
+    double our_num_deaths;
+    double our_num_recovery_attempts; 
+};
+
 // Data being used for the X display
 struct display_t 
 {
@@ -90,8 +140,4 @@ struct display_t
     #endif
 };
 
-struct global_t global;
-struct our_t our;
-struct const_t constant;
-struct stats_t stats;
-struct display_t dpy;
+#endif
