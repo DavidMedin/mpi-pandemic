@@ -14,5 +14,4 @@ copy: pandemic.bin
 	./copy.sh < hostfile
 
 pandemic.bin: main.c
-	mpicc main.c -o pandemic.bin
-ARGS="stuff"
+	mpicc src/pandemic.c -o pandemic.bin

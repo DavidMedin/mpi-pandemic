@@ -8,7 +8,7 @@ These Ubuntu packages are required to run this project
 * openmpi-doc (this one is optional)
 You can install these with this command (as root):
 ```bash
-apt install openmpi-bin openmpi-common libopenmpi-dev openmpi-doc
+apt install openmpi-bin openmpi-common libopenmpi-dev openmpi-doc build-essential
 ```
 
 ## Project Structure

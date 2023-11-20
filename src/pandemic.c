@@ -2,6 +2,17 @@
 #include <string.h>
 #include <stdlib.h>
 #include <mpi.h>
+
+#include "defaults.h"
+#include "initialize.h"
+#include "infection.h"
+#include "core.h"
+#include "finalize.h"
+
+#if defined(X_DISPLAY) || defined(TEXT_DISPLAY)
+#include "display.h"
+#endif
+
 #define DEBUG 1
 
 int is_zero_string(char* input) {
@@ -30,6 +41,12 @@ int main(int argc, char** argv){
     // for(int i = 0;i < argc;i++){
     //     printf("%d: %s\n",i, argv[i]);
     // }
+    init(&global, &our, &constant, &stats, &dpy, &argc, &argv);
+    // for(our.current_day = 0; our.current_day <= constant.total_number_of_days; our.current_day++)
+    // {
+    // }
+
+
     int n_people = 10;
     int init_inf = 1;
     int env_width = 40;
@@ -89,10 +106,6 @@ int main(int argc, char** argv){
     int my_rank;
     int world_size;
 
-    MPI_Init(NULL, NULL);
-
-    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
-    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
     printf("There are %d nodes in this world\n", world_size);
 
